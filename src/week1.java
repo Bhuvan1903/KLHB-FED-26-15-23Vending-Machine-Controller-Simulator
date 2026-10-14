@@ -1,37 +1,22 @@
-import java.util.Scanner;
+import java.io.IOException;
+import java.nio.file.*;
+import java.util.*;
+import java.util.stream.*;
 
-public class VendingMachine {
+class Product {
+    int id, stock;
+    String name;
+    double price;
 
-    public static void main(String[] args) {
+    Product(int id, String name, double price, int stock) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.stock = stock;
+    }
 
-        Scanner sc = new Scanner(System.in);
-
-        int choice;
-        int quantity;
-        int price;
-        int stock;
-        int total = 0;
-        int payment;
-        int continueChoice;
-
-        int chipsStock = 15;
-        int chocolateStock = 15;
-        int juiceStock = 15;
-        int proteinbarStock = 15;
-        int biscuitStock = 15;
-
-        System.out.println("===== VENDING MACHINE =====");
-      for (int i = 1; i <= 10; i++) {
-
-            System.out.println("===== MENU ====="); 
-            System.out.println("1. Chips - Rs. 20 (Stock: " + chipsStock + ")");
-            System.out.println("2. Chocolate - Rs. 30 (Stock: " + chocolateStock + ")");
-            System.out.println("3. Juice - Rs. 40 (Stock: " + juiceStock + ")");
-            System.out.println("4. Protein Bar - Rs. 70 (Stock: " + proteinbarStock + ")");
-            System.out.println("5. Biscuit - Rs. 25 (Stock: " + biscuitStock + ")");
-
-            System.out.print("Enter your choice: ");
-            choice = sc.nextInt();
-
-            price = 0;
-            stock = 0;
+    public String toString() {
+        return id + ". " + name + " - Rs." + price
+                + " | Stock: " + stock;
+    }
+}
