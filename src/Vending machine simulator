@@ -44,3 +44,12 @@ static ArrayList<String> history = new ArrayList<>();
             }
         }
     }
+static void showProducts() {
+        for (Product p : products)
+            System.out.println(p);
+    }
+
+    static void buyProduct() {
+        showProducts();
+        int id = readInt("Enter product ID (0 to cancel): ");
+        if (id == 0) return;
