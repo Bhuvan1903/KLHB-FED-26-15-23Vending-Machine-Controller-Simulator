@@ -141,3 +141,80 @@ public class VendingMachineSimulator1 {
             System.out.println("Could not save transaction.");
         }
     }
+void salesReport() {
+        System.out.println(
+                "Transactions this session: " + history.size());
+
+        if (history.isEmpty()) {
+            System.out.println("No transactions in this session.");
+        } else {
+            history.forEach(System.out::println);
+        }
+
+        try (Stream<String> lines = Files.lines(file)) {
+            System.out.println(
+                    "Saved transaction count: " + lines.count());
+        } catch (IOException e) {
+            System.out.println("No saved transactions yet.");
+        }
+    }
+
+    void sortByPrice() {
+        Arrays.sort(
+                products,
+                Comparator.comparingDouble(p -> p.price)
+        );
+
+        System.out.println("\nProducts sorted by price:");
+        showProducts();
+    }
+
+    
+    void run() {
+        int choice;
+
+        do {
+            System.out.println("\n=== CASH VENDING MACHINE ===");
+            System.out.println("1. View products");
+            System.out.println("2. Buy product");
+            System.out.println("3. Sort by price");
+            System.out.println("4. Transaction history");
+            System.out.println("5. Exit");
+
+ choice = readInt("Enter choice: ");
+
+            switch (choice) {
+                case 1:
+                    showProducts();
+                    break;
+
+                case 2:
+                    buyProduct();
+                    break;
+
+                case 3:
+                    sortByPrice();
+                    break;
+
+                case 4:
+                    salesReport();
+                    break;
+
+                case 5:
+                    System.out.println("Thank you!");
+                    break;
+
+                default:
+                    System.out.println("Invalid choice.");
+            }
+
+        } while (choice != 5);
+    }
+
+    public static void main(String[] args) {
+        VendingMachineSimulator1 vm =
+                new VendingMachineSimulator1();
+
+        vm.run();
+    }
+}
