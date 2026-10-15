@@ -215,4 +215,6 @@ void salesReport() {
                 new VendingMachineSimulator1();
 
         vm.run();
+  }
+}
    
