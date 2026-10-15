@@ -208,13 +208,4 @@ void salesReport() {
                     System.out.println("Invalid choice.");
             }
 
-        } while (choice != 5);
-    }
-
-    public static void main(String[] args) {
-        VendingMachineSimulator1 vm =
-                new VendingMachineSimulator1();
-
-        vm.run();
-    }
-}
+       
