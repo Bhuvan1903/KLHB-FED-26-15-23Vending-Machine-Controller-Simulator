@@ -53,3 +53,6 @@ static void showProducts() {
         showProducts();
         int id = readInt("Enter product ID (0 to cancel): ");
         if (id == 0) return;
+Product selected = null;
+        for (Product p : products)
+            if (p.id == id) selected = p;
