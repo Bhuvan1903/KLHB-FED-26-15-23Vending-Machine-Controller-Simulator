@@ -21,3 +21,13 @@ class Product {
     }
 }
 
+public class VendingMachineSimulator {
+    static Scanner sc = new Scanner(System.in);
+
+    static Product[] products = {
+        new Product(1, "Water", 20, 10),
+        new Product(2, "Juice", 35, 8),
+        new Product(3, "Chips", 20, 12),
+        new Product(4, "Chocolate", 30, 10),
+        new Product(5, "Biscuits", 15, 15)
+    };
