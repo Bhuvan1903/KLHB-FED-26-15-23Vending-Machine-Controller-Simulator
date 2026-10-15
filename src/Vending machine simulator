@@ -31,3 +31,16 @@ public class VendingMachineSimulator {
         new Product(4, "Chocolate", 30, 10),
         new Product(5, "Biscuits", 15, 15)
     };
+static ArrayList<String> history = new ArrayList<>();
+    static Path file = Path.of("transactions.txt");
+
+    static int readInt(String msg) {
+        while (true) {
+            try {
+                System.out.print(msg);
+                return Integer.parseInt(sc.nextLine().trim());
+            } catch (NumberFormatException e) {
+                System.out.println("Enter a valid whole number.");
+            }
+        }
+    }
