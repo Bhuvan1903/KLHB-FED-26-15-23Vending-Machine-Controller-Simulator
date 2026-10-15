@@ -15,26 +15,29 @@ class Product {
         this.stock = stock;
     }
 
+    
     public String toString() {
         return id + ". " + name + " - Rs." + price
                 + " | Stock: " + stock;
     }
 }
 
-public class VendingMachineSimulator {
-    static Scanner sc = new Scanner(System.in);
+public class VendingMachineSimulator1 {
 
-    static Product[] products = {
+    Scanner sc = new Scanner(System.in);
+
+    Product[] products = {
         new Product(1, "Water", 20, 10),
         new Product(2, "Juice", 35, 8),
         new Product(3, "Chips", 20, 12),
         new Product(4, "Chocolate", 30, 10),
         new Product(5, "Biscuits", 15, 15)
     };
-static ArrayList<String> history = new ArrayList<>();
-    static Path file = Path.of("transactions.txt");
 
-    static int readInt(String msg) {
+    ArrayList<String> history = new ArrayList<>();
+    Path file = Path.of("transactions.txt");
+
+    int readInt(String msg) {
         while (true) {
             try {
                 System.out.print(msg);
@@ -44,16 +47,98 @@ static ArrayList<String> history = new ArrayList<>();
             }
         }
     }
-static void showProducts() {
-        for (Product p : products)
+
+    void showProducts() {
+        for (Product p : products) {
             System.out.println(p);
+        }
     }
 
-    static void buyProduct() {
+    void buyProduct() {
         showProducts();
+
         int id = readInt("Enter product ID (0 to cancel): ");
-        if (id == 0) return;
-Product selected = null;
-        for (Product p : products)
-            if (p.id == id) selected = p;
+
+        if (id == 0) {
+            return;
+        }
+
+        Product selected = null;
+
+        for (Product p : products) {
+            if (p.id == id) {
+                selected = p;
+                break;
+            }
+        }
+
+        if (selected == null || selected.stock <= 0) {
+            System.out.println("Invalid product or out of stock.");
+            return;
+        }
+
+        int qty = readInt("Enter quantity: ");
+
+        if (qty <= 0 || qty > selected.stock) {
+            System.out.println("Invalid quantity.");
+            return;
+        }
+
+        double total = selected.price * qty;
+        System.out.println("Total: Rs." + total);
+
+        double paid = 0;
+
+        while (paid < total) {
+            System.out.print("Insert cash (0 to cancel): ");
+
+            double amount;
+
+            try {
+                amount = Double.parseDouble(sc.nextLine().trim());
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid amount.");
+                continue;
+            }
+
+            if (!Double.isFinite(amount) || amount < 0) {
+                System.out.println("Enter a valid amount.");
+                continue;
+            }
+
+            if (amount == 0) {
+                System.out.println("Purchase cancelled.");
+                return;
+            }
+
+            paid += amount;
+        }
+
+        double change =
+                Math.round((paid - total) * 100.0) / 100.0;
+
+        selected.stock -= qty;
+
+        String receipt = selected.name + " x" + qty
+                + " | Total: Rs." + total
+                + " | Paid: Rs." + paid
+                + " | Change: Rs." + change;
+
+        history.add(receipt);
+
+        System.out.println("Payment successful!");
+        System.out.println(receipt);
+        System.out.println("Item dispensed!");
+
+        try {
+            Files.writeString(
+                    file,
+                    receipt + System.lineSeparator(),
+                    StandardOpenOption.CREATE,
+                    StandardOpenOption.APPEND
+            );
+        } catch (IOException e) {
+            System.out.println("Could not save transaction.");
+        }
+    }
 
