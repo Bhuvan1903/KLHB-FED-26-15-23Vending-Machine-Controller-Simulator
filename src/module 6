@@ -1,0 +1,22 @@
+//module6
+
+ArrayList<String> history = new ArrayList<>();
+
+
+history.add(receipt);
+
+
+System.out.println("Transactions this session: " + history.size());
+if (history.isEmpty()) {
+    System.out.println("No transactions in this session.");
+} else {
+    history.forEach(System.out::println);
+}
+
+
+Comparator.comparingDouble(p -> p.price)
+
+
+try (Stream<String> lines = Files.lines(file)) {
+    System.out.println("Saved transaction count: " + lines.count());
+}
