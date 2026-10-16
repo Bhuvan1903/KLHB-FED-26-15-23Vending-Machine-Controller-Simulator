@@ -1,0 +1,17 @@
+//module 1
+int id, stock;
+String name;
+double price;
+
+
+Scanner sc = new Scanner(System.in);
+
+
+return Integer.parseInt(sc.nextLine().trim());
+amount = Double.parseDouble(sc.nextLine().trim());
+
+
+double total = selected.price * qty;
+paid += amount;
+double change = Math.round((paid - total) * 100.0) / 100.0;
+selected.stock -= qty;
