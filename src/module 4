@@ -1,0 +1,29 @@
+//module 4
+
+class Product {
+    int id, stock;
+    String name;
+    double price;
+
+    Product(int id, String name, double price, int stock) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.stock = stock;
+    }
+
+    public String toString() {
+        return id + ". " + name + " - Rs." + price
+                + " | Stock: " + stock;
+    }
+}
+
+
+VendingMachineSimulator1 vm = new VendingMachineSimulator1();
+
+try {
+    Files.writeString(file, receipt + System.lineSeparator(),
+            StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+} catch (IOException e) {
+    System.out.println("Could not save transaction.");
+}
