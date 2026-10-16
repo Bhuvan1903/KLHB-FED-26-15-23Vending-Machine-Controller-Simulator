@@ -1,0 +1,28 @@
+//module5
+
+import java.io.IOException;
+import java.nio.file.*;
+import java.util.*;
+import java.util.stream.*;
+
+
+Path file = Path.of("transactions.txt");
+
+
+String receipt = selected.name + " x" + qty
+        + " | Total: Rs." + total
+        + " | Paid: Rs." + paid
+        + " | Change: Rs." + change;
+
+
+Arrays.sort(products, Comparator.comparingDouble(p -> p.price));
+
+
+Files.writeString(file, receipt + System.lineSeparator(),
+        StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+
+try (Stream<String> lines = Files.lines(file)) {
+    System.out.println("Saved transaction count: " + lines.count());
+} catch (IOException e) {
+    System.out.println("No saved transactions yet.");
+}
