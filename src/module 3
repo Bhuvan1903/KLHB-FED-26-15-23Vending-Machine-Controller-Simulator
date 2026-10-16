@@ -1,0 +1,41 @@
+//module 3
+mod --3
+Product[] products = {
+    new Product(1, "Water", 20, 10),
+    new Product(2, "Juice", 35, 8),
+    new Product(3, "Chips", 20, 12),
+    new Product(4, "Chocolate", 30, 10),
+    new Product(5, "Biscuits", 15, 15)
+};
+
+
+int readInt(String msg) {
+    while (true) {
+        try {
+            System.out.print(msg);
+            return Integer.parseInt(sc.nextLine().trim());
+        } catch (NumberFormatException e) {
+            System.out.println("Enter a valid whole number.");
+        }
+    }
+}
+
+
+void showProducts() {
+    for (Product p : products) {
+        System.out.println(p);
+    }
+}
+
+
+void sortByPrice() {
+    Arrays.sort(products, Comparator.comparingDouble(p -> p.price));
+    System.out.println("\nProducts sorted by price:");
+    showProducts();
+}
+
+
+public static void main(String[] args) {
+    VendingMachineSimulator1 vm = new VendingMachineSimulator1();
+    vm.run();
+}
