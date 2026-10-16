@@ -1,0 +1,57 @@
+//module 2
+mod --2 ---if (id == 0) {
+    return;
+}
+
+
+if (selected == null || selected.stock <= 0) {
+    System.out.println("Invalid product or out of stock.");
+    return;
+}
+if (qty <= 0 || qty > selected.stock) {
+    System.out.println("Invalid quantity.");
+    return;
+}
+
+
+for (Product p : products) {
+    if (p.id == id) {
+        selected = p;
+        break;
+    }
+}
+
+
+while (paid < total) {
+    System.out.print("Insert cash (0 to cancel): ");
+    double amount;
+    try {
+        amount = Double.parseDouble(sc.nextLine().trim());
+    } catch (NumberFormatException e) {
+        System.out.println("Invalid amount.");
+        continue;
+    }
+    if (!Double.isFinite(amount) || amount < 0) {
+        System.out.println("Enter a valid amount.");
+        continue;
+    }
+    if (amount == 0) {
+        System.out.println("Purchase cancelled.");
+        return;
+    }
+    paid += amount;
+}
+
+
+do {
+    // ...menu printing...
+    choice = readInt("Enter choice: ");
+    switch (choice) {
+        case 1: showProducts(); break;
+        case 2: buyProduct(); break;
+        case 3: sortByPrice(); break;
+        case 4: salesReport(); break;
+        case 5: System.out.println("Thank you!"); break;
+        default: System.out.println("Invalid choice.");
+    }
+} while (choice != 5);
